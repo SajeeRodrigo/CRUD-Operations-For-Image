@@ -22,7 +22,7 @@ namespace CRUD_For_Images_with_Data_grid_view
         MySqlConnection con = new MySqlConnection("datasource=localhost;port=3306;Initial Catalog=crudimages;username=root; password=");
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -38,15 +38,16 @@ namespace CRUD_For_Images_with_Data_grid_view
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            FillDGV();
+            FillDGV("");
         }
 
-        public void FillDGV()
+        public void FillDGV( string valueToSearch)
         {
-            MySqlCommand cmd = new MySqlCommand("SELECT * FROM image", con);
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM `image` WHERE CONCAT (`ID`,`Name`,`Description`) LIKE '%" + valueToSearch + "%'", con);
             MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
             DataTable tbl = new DataTable();
             adp.Fill(tbl);
+
             dataGridView1.RowTemplate.Height = 60;
             dataGridView1.AllowUserToAddRows = false;
 
@@ -69,7 +70,7 @@ namespace CRUD_For_Images_with_Data_grid_view
             pictureBox1.Image = Image.FromStream(ms);
 
             textBox1.Text = dataGridView1.CurrentRow.Cells[0].Value.ToString();
-            textBox2.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
+            textBox2.Text = dataGridView1.CurrentRow.Cells[1].Value.ToString();
             textBox3.Text = dataGridView1.CurrentRow.Cells[2].Value.ToString();
 
         }
@@ -86,7 +87,7 @@ namespace CRUD_For_Images_with_Data_grid_view
             }
             con.Close();
 
-            FillDGV();
+            FillDGV("");
         }
 
         private void InsertBtn_Click(object sender, EventArgs e)
@@ -101,7 +102,82 @@ namespace CRUD_For_Images_with_Data_grid_view
             cmd.Parameters.Add("@desc", MySqlDbType.VarChar).Value = textBox3.Text;
             cmd.Parameters.Add("@img", MySqlDbType.Blob).Value = img;
 
-            ExecMyQuery(cmd, "Data Inserted");
+            ExecMyQuery(cmd, "Data Inserted!");
         }
+
+        private void btn_Update_Click(object sender, EventArgs e)
+        {
+
+            MemoryStream ms = new MemoryStream();
+            pictureBox1.Image.Save(ms, pictureBox1.Image.RawFormat);
+            Byte[] img = ms.ToArray();
+
+            MySqlCommand cmd = new MySqlCommand("UPDATE `image` SET `Name`=@name,`Description`=@desc,`Image`=@img WHERE `ID`= @id", con);
+            cmd.Parameters.Add("@id", MySqlDbType.VarChar).Value = textBox1.Text;
+            cmd.Parameters.Add("@name", MySqlDbType.VarChar).Value = textBox2.Text;
+            cmd.Parameters.Add("@desc", MySqlDbType.VarChar).Value = textBox3.Text;
+            cmd.Parameters.Add("@img", MySqlDbType.Blob).Value = img;
+
+            ExecMyQuery(cmd, "Data Updated!");
+
+        }
+
+        private void btn_Delete_Click(object sender, EventArgs e)
+        {
+
+            MySqlCommand cmd = new MySqlCommand("DELETE FROM `image` WHERE `ID`= @id", con);
+            cmd.Parameters.Add("@id", MySqlDbType.VarChar).Value = textBox1.Text;
+         
+
+            ExecMyQuery(cmd, "Data Deleted!");
+            clearFields();
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            FillDGV(textBox4.Text);
+        }
+
+        private void btn_Find_Click(object sender, EventArgs e)
+        {
+
+            MySqlCommand cmd = new MySqlCommand("SELECT * FROM `image` WHERE ID= @id", con);
+            cmd.Parameters.Add("@id", MySqlDbType.VarChar).Value = textBox1.Text;
+
+            MySqlDataAdapter adp = new MySqlDataAdapter(cmd);
+            DataTable tbl = new DataTable();
+            adp.Fill(tbl);
+
+            if (tbl.Rows.Count <=0)
+            {
+                MessageBox.Show("No data Found");
+                clearFields();
+            }
+            else
+            {
+                textBox1.Text = tbl.Rows[0][0].ToString();
+                textBox2.Text = tbl.Rows[0][1].ToString();
+                textBox3.Text = tbl.Rows[0][2].ToString();
+
+                byte[] img = (byte[])tbl.Rows[0][3];
+                MemoryStream ms = new MemoryStream(img);
+                pictureBox1.Image = Image.FromStream(ms);
+            }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            clearFields();
+        }
+        public void clearFields()
+        {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox3.Text = "";
+            pictureBox1.Image = null;
+        }
+             
     }
 }
