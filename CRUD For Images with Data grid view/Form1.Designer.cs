@@ -40,6 +40,12 @@ namespace CRUD_For_Images_with_Data_grid_view
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.InsertBtn = new System.Windows.Forms.Button();
+            this.btn_Update = new System.Windows.Forms.Button();
+            this.btn_Delete = new System.Windows.Forms.Button();
+            this.textBox4 = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btn_Find = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -65,12 +71,12 @@ namespace CRUD_For_Images_with_Data_grid_view
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(412, 28);
+            this.dataGridView1.Location = new System.Drawing.Point(474, 104);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(363, 395);
+            this.dataGridView1.Size = new System.Drawing.Size(523, 334);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             // 
@@ -147,11 +153,75 @@ namespace CRUD_For_Images_with_Data_grid_view
             this.InsertBtn.UseVisualStyleBackColor = true;
             this.InsertBtn.Click += new System.EventHandler(this.InsertBtn_Click);
             // 
+            // btn_Update
+            // 
+            this.btn_Update.Location = new System.Drawing.Point(299, 294);
+            this.btn_Update.Name = "btn_Update";
+            this.btn_Update.Size = new System.Drawing.Size(88, 31);
+            this.btn_Update.TabIndex = 11;
+            this.btn_Update.Text = "Update";
+            this.btn_Update.UseVisualStyleBackColor = true;
+            this.btn_Update.Click += new System.EventHandler(this.btn_Update_Click);
+            // 
+            // btn_Delete
+            // 
+            this.btn_Delete.Location = new System.Drawing.Point(299, 347);
+            this.btn_Delete.Name = "btn_Delete";
+            this.btn_Delete.Size = new System.Drawing.Size(88, 31);
+            this.btn_Delete.TabIndex = 12;
+            this.btn_Delete.Text = "Delete";
+            this.btn_Delete.UseVisualStyleBackColor = true;
+            this.btn_Delete.Click += new System.EventHandler(this.btn_Delete_Click);
+            // 
+            // textBox4
+            // 
+            this.textBox4.Location = new System.Drawing.Point(702, 57);
+            this.textBox4.Name = "textBox4";
+            this.textBox4.Size = new System.Drawing.Size(231, 22);
+            this.textBox4.TabIndex = 13;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(456, 22);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(192, 20);
+            this.label5.TabIndex = 14;
+            this.label5.Text = "Enter Value to search";
+            // 
+            // btn_Find
+            // 
+            this.btn_Find.Location = new System.Drawing.Point(342, 43);
+            this.btn_Find.Name = "btn_Find";
+            this.btn_Find.Size = new System.Drawing.Size(62, 24);
+            this.btn_Find.TabIndex = 15;
+            this.btn_Find.Text = "Find";
+            this.btn_Find.UseVisualStyleBackColor = true;
+            this.btn_Find.Click += new System.EventHandler(this.btn_Find_Click);
+            // 
+            // button2
+            // 
+            this.button2.Location = new System.Drawing.Point(299, 407);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(88, 31);
+            this.button2.TabIndex = 16;
+            this.button2.Text = "Clear";
+            this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1039, 474);
+            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btn_Find);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.textBox4);
+            this.Controls.Add(this.btn_Delete);
+            this.Controls.Add(this.btn_Update);
             this.Controls.Add(this.InsertBtn);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.textBox3);
@@ -186,6 +256,12 @@ namespace CRUD_For_Images_with_Data_grid_view
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button InsertBtn;
+        private System.Windows.Forms.Button btn_Update;
+        private System.Windows.Forms.Button btn_Delete;
+        private System.Windows.Forms.TextBox textBox4;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btn_Find;
+        private System.Windows.Forms.Button button2;
     }
 }
 
